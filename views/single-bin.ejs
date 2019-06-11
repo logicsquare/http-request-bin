@@ -6,6 +6,7 @@
       body { }
       sub > small { font-size: 60%; }
       a.create-new-bin-link { margin-left: 2.5em; }
+      #hit-url { padding: 7px 17px; background: #dcdcdc; font-weight: bold; font-size: 90%; }
       table.invocation { border: 1px solid black; padding: 1em; margin-top: 2.5em; border-collapse: collapse; }
       table.invocation tr, td { border: 1px solid black; padding: 1em; }
     </style>
@@ -15,7 +16,8 @@
     <h1>
       <%= bin.shortId %> <sub><small>({{ invocations.length }} Invocations)</small></sub>
     </h1>
-    <input id="hit-url" value="<%= `${process.env.SITE_URL}/${bin.shortId}` %>" style="min-width:300px;" readonly>
+    <span id="hit-url"><%= `${process.env.SITE_URL}/${bin.shortId}` %></span>
+    <!-- <input id="hit-url" value="<%= `${process.env.SITE_URL}/${bin.shortId}` %>" style="min-width:300px;" readonly> -->
     <!-- Trigger -->
     <button class="btn" data-clipboard-target="#hit-url">
       Copy
