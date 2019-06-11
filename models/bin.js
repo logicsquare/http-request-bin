@@ -16,7 +16,8 @@ const BinSchema = new mongoose.Schema({
 
   lastInvocationAt: {
     type: Date,
-    default: null
+    default: null,
+    expires: process.env.MONGODB_TTL
   },
 
   createdAt: {

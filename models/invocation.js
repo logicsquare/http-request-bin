@@ -20,7 +20,8 @@ const InvocationSchema = new mongoose.Schema({
 
   createdAt: {
     type: Date,
-    default: Date.now
+    default: Date.now,
+    expires: process.env.MONGODB_TTL
   },
   lastModifiedAt: {
     type: Date,
