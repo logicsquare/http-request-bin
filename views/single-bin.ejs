@@ -1,0 +1,59 @@
+<html>
+  <head>
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+    <style>
+      body { }
+      table.invocation { border: 1px solid black; padding: 1em; margin-top: 2.5em; border-collapse: collapse; }
+      table.invocation tr, td { border: 1px solid black; padding: 1em; }
+    </style>
+  </head>
+  <body>
+  <div id="app">
+    <h2><%= bin.shortId %></h2>
+    <input id="hit-url" value="<%= `${process.env.SITE_URL}/${bin.shortId}` %>" style="min-width:300px;" readonly>
+    <!-- Trigger -->
+    <button class="btn" data-clipboard-target="#hit-url">
+      Copy
+    </button>
+    <hr/>
+
+    <div v-if="bin._invocations.length === 0">
+      <p>Waiting for first request...</p>
+    </div>
+    <table class="invocation" v-for="invocation in invocations" v-else>
+      <tr>
+        <td>When:</td>
+        <td>{{ new Date(invocation.createdAt) }}</td>
+      </tr>
+      <tr>
+        <td>Method:</td>
+        <td>{{ invocation.method }}</td>
+      </tr>
+      <tr>
+        <td>Headers:</td>
+        <td>{{ JSON.stringify(invocation.headers, null, 2) }}</td>
+      </tr>
+      <tr>
+        <td>Body:</td>
+        <td>{{ JSON.stringify(invocation.body, null, 2) }}</td>
+      </tr>
+    </table>
+
+  </div>
+  <script>
+    new ClipboardJS('.btn')
+    var vm = new Vue({
+      el: "#app",
+      data: {
+        bin: <%- JSON.stringify(bin) %>
+      },
+      computed: {
+        invocations() {
+          return this.bin._invocations.reverse()
+        }
+      }
+    })
+  </script>
+  </body>
+</html>
