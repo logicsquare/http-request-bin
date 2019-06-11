@@ -33,7 +33,8 @@ const BinSchema = new mongoose.Schema({
 BinSchema.virtual("_invocations", {
   localField: "_id",
   foreignField: "_bin",
-  ref: "Invocation"
+  ref: "Invocation",
+  options: { sort: { createdAt: -1 } }
 })
 
 BinSchema.set("toJSON", { virtuals: true })
