@@ -15,7 +15,8 @@ module.exports = {
         origin,
         href,
         headers,
-        body: ctx.request.body
+        body: ctx.request.body,
+        ip: ctx.request.ip
       }
       await Invocation.create(invocation)
       ctx.status = 200

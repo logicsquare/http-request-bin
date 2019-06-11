@@ -12,6 +12,7 @@ const InvocationSchema = new mongoose.Schema({
     toUpperCase: true,
     enum: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"]
   },
+  ip: String,
   origin: String,
   href: String,
   headers: {},
