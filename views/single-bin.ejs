@@ -4,13 +4,16 @@
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
     <style>
       body { }
+      sub > small { font-size: 60%; }
       table.invocation { border: 1px solid black; padding: 1em; margin-top: 2.5em; border-collapse: collapse; }
       table.invocation tr, td { border: 1px solid black; padding: 1em; }
     </style>
   </head>
   <body>
   <div id="app">
-    <h2><%= bin.shortId %></h2>
+    <h1>
+      <%= bin.shortId %> <sub><small>({{ invocations.length }} Invocations)</small></sub>
+    </h1>
     <input id="hit-url" value="<%= `${process.env.SITE_URL}/${bin.shortId}` %>" style="min-width:300px;" readonly>
     <!-- Trigger -->
     <button class="btn" data-clipboard-target="#hit-url">
@@ -18,7 +21,7 @@
     </button>
     <hr/>
 
-    <div v-if="bin._invocations.length === 0">
+    <div v-if="invocations.length === 0">
       <p>Waiting for first request...</p>
     </div>
     <table class="invocation" v-for="invocation in invocations" v-else>
