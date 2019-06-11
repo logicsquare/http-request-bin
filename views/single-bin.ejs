@@ -36,11 +36,15 @@
       </tr>
       <tr>
         <td>Headers:</td>
-        <td>{{ JSON.stringify(invocation.headers, null, 2) }}</td>
+        <td>
+          <pre class="json">{{ JSON.stringify(invocation.headers, undefined, 2) }}</pre>
+        </td>
       </tr>
       <tr>
         <td>Body:</td>
-        <td>{{ JSON.stringify(invocation.body, null, 2) }}</td>
+        <td>
+          <pre class="json">{{ JSON.stringify(invocation.body, undefined, 2) }}</pre>
+        </td>
       </tr>
     </table>
 
