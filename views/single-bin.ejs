@@ -5,6 +5,7 @@
     <style>
       body { }
       sub > small { font-size: 60%; }
+      a.create-new-bin-link { margin-left: 2.5em; }
       table.invocation { border: 1px solid black; padding: 1em; margin-top: 2.5em; border-collapse: collapse; }
       table.invocation tr, td { border: 1px solid black; padding: 1em; }
     </style>
@@ -19,6 +20,7 @@
     <button class="btn" data-clipboard-target="#hit-url">
       Copy
     </button>
+    <a class="create-new-bin-link" href="<%= process.env.SITE_URL %>">Create New Bin</a>
     <hr/>
 
     <div v-if="invocations.length === 0">
