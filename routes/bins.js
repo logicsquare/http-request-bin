@@ -1,3 +1,4 @@
+const Faye = require("faye")
 const Bin = require("../models/bin")
 const Invocation = require("../models/invocation")
 
@@ -9,7 +10,7 @@ module.exports = {
       } = ctx
       const bin = await Bin.findOne({ shortId: ctx.params.shortid }).select("_id").lean().exec()
       if (bin === null) throw new Error("No Such Bin!!")
-      const invocation = {
+      const data = {
         _bin: bin._id,
         method,
         origin,
@@ -18,7 +19,10 @@ module.exports = {
         body: ctx.request.body,
         ip: ctx.request.ip
       }
-      await Invocation.create(invocation)
+      const invocation = await Invocation.create(data)
+      // Real time notif:
+      const client = new Faye.Client(`${process.env.SITE_URL}/faye`)
+      client.publish(`/bin/${invocation._bin}`, { invocation: invocation.toObject() })
       ctx.status = 200
       ctx.body = "OK"
     } catch (error) {

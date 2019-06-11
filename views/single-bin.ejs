@@ -2,6 +2,7 @@
   <head>
     <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+    <script src="<%= process.env.SITE_URL %>/faye/client.js"></script>
     <style>
       body { }
       sub > small { font-size: 60%; }
@@ -58,6 +59,11 @@
   </div>
   <script>
     new ClipboardJS('.btn')
+    var client = new Faye.Client("<%= process.env.SITE_URL %>/faye")
+    client.subscribe("/bin/<%= bin._id %>", function ({ invocation }) {
+      console.log(vm)
+      vm.bin._invocations.push(invocation)
+    })
     var vm = new Vue({
       el: "#app",
       data: {
