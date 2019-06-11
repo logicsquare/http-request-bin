@@ -21,7 +21,7 @@ module.exports = {
       }
       const invocation = await Invocation.create(data)
       // Real time notif:
-      const client = new Faye.Client(`${process.env.SITE_URL}/faye`)
+      const client = new Faye.Client(`${process.env.FAYE_URL}`)
       client.publish(`/bin/${invocation._bin}`, { invocation: invocation.toObject() })
       ctx.status = 200
       ctx.body = "OK"

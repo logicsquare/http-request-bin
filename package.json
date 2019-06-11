@@ -2,6 +2,7 @@
   "name": "foo",
   "version": "0.1.0",
   "private": true,
+  "main": "bin/www",
   "scripts": {
     "start": "npm run dev",
     "dev": "./node_modules/.bin/nodemon bin/www",
