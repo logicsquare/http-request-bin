@@ -17,7 +17,7 @@ module.exports = {
         href,
         headers,
         body: ctx.request.body,
-        ip: ctx.request.ip
+        ip: headers["x-forwarded-for"] || ctx.request.ip
       }
       const invocation = await Invocation.create(data)
       // Real time notif:
